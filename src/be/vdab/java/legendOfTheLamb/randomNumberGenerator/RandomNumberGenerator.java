@@ -10,7 +10,7 @@ public class RandomNumberGenerator {
 
     public int generateRandomNumber(int bound){
         Random random = new Random();
-        return random.nextInt(bound);
+        return random.nextInt(bound)+1;
     }
 
     public int generateHP(int bound){

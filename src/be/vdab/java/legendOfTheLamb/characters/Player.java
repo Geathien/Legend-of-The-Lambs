@@ -21,7 +21,7 @@ public class Player {
         setCharacterClass(characterClass);
         setStats();
         setHP();
-        setLvl();
+        setLvl(1);
         setAC();
         setSpeed();
     }
@@ -141,22 +141,8 @@ public class Player {
         return lvl;
     }
 
-    public void setLvl() {
-        if (xp >= 1500){
-            this.lvl = 5;
-        }
-        else if (xp >= 700){
-            this.lvl = 4;
-        }
-        else if (xp >= 250){
-            this.lvl = 3;
-        }
-        else if (xp >= 100){
-            this.lvl = 2;
-        }
-        else {
-            this.lvl = 1;
-        }
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
     }
 
     public int getXp() {
@@ -164,25 +150,29 @@ public class Player {
     }
 
     public void setXp(int xp) {
-        this.xp += xp;
+        this.xp = xp;
+
     }
 
     public void setAC() {
         int adjective =0;
-        if(characterClass.toString() == "Fighter"){
-            adjective = (int) Math.floor((strength-10)/2);
-        }
-        else if(characterClass.toString() == "Ranger"){
-            adjective= (int) Math.floor((dexterity-10)/2);
-        }
-        else if(characterClass.toString() == "Healer"){
-            adjective= (int) Math.floor((dexterity-5)/2);
+        switch (characterClass.getCharacterClass()) {
+            case "Fighter":
+                adjective = (int) Math.floor((strength - 10) / 2);
+                break;
+            case "Ranger":
+                adjective = (int) Math.floor((dexterity - 10) / 2);
+                break;
+            case "Healer":
+                adjective = (int) Math.floor((dexterity - 5) / 2);
+                break;
         }
         this.AC = characterClass.getArmour() + adjective;
     }
 
     public void setSpeed(){
-        this.speed = race.getBaseSpeed();
+        int adjective = Math.max(getDexterity(),getConstitution());
+        this.speed = race.getBaseSpeed()+(int) Math.floor((adjective-10)/2);
     }
 
     public Race getRace() {
@@ -200,6 +190,7 @@ public class Player {
     public void setHP() {
         this.HP = characterClass.getHP();
     }
+    public void newHP(int HP){ this.HP= HP;}
 
     public int getHP() {
         return HP;
@@ -243,7 +234,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return name + "{"+
                 "race=" + race +
                 ", characterClass=" + characterClass +
                 ", HP=" + HP +

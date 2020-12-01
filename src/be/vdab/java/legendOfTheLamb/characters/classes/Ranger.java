@@ -3,17 +3,20 @@ package be.vdab.java.legendOfTheLamb.characters.classes;
 import be.vdab.java.legendOfTheLamb.items.Item;
 import be.vdab.java.legendOfTheLamb.items.armour.Armour;
 import be.vdab.java.legendOfTheLamb.items.armour.LeatherArmour;
+import be.vdab.java.legendOfTheLamb.items.packs.Backpack;
 import be.vdab.java.legendOfTheLamb.items.weapons.Bow;
+import be.vdab.java.legendOfTheLamb.items.weapons.Sword;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ranger implements CharacterClass {
+    Backpack backpack = new Backpack();
     private String characterClass = "Ranger";
     private int armourBase = 6;
     private int lifeDice = 8;
-    List<Item> items = new ArrayList<>();
+//    List<Item> items = new ArrayList<>();
     private int HP;
     private String description = "Rangers are one with nature and masters of the bow. With their light leather armour, they are agile and lean.";
     RandomNumberGenerator RNG = new RandomNumberGenerator();
@@ -34,7 +37,7 @@ public class Ranger implements CharacterClass {
     }
 
     public int getABItem() {
-        Armour armour = (Armour)items.get(1);
+        Armour armour = (Armour)backpack.getItem(1);
         return armour.armourBase();
     }
 
@@ -76,13 +79,15 @@ public class Ranger implements CharacterClass {
         this.description = description;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
+//    public List<Item> getItems() {
+//        return items;
+//    }
 
     public void setItems() {
-        items.add(new Bow());
-        items.add(new LeatherArmour());
+       backpack.insertItem(new Bow());
+        backpack.insertItem(new LeatherArmour());
+        backpack.insertItem(new Sword());
+        backpack.addGold(10);
     }
 
     // TODO setAbilities

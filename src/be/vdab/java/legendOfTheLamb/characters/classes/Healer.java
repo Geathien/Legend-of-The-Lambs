@@ -3,6 +3,8 @@ package be.vdab.java.legendOfTheLamb.characters.classes;
 import be.vdab.java.legendOfTheLamb.items.Item;
 import be.vdab.java.legendOfTheLamb.items.armour.Armour;
 import be.vdab.java.legendOfTheLamb.items.armour.Clothes;
+import be.vdab.java.legendOfTheLamb.items.packs.ClericalBackpack;
+import be.vdab.java.legendOfTheLamb.items.weapons.Dagger;
 import be.vdab.java.legendOfTheLamb.items.weapons.HolySymbol;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
@@ -10,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Healer implements CharacterClass {
+    ClericalBackpack backpack = new ClericalBackpack();
     private String characterClass = "Healer";
     private int armourBase = 4;
     private int lifeDice = 6;
-    List<Item> items = new ArrayList<>();
+ //   List<Item> items = new ArrayList<>();
     private int HP;
     private String description = "The healer is a support class that can not take many hits, but can support other creatures," +
             " or release the wrath of the gods on monsters." +
@@ -31,7 +34,7 @@ public class Healer implements CharacterClass {
     }
 
     public int getABItem() {
-        Armour armour = (Armour)items.get(1);
+        Armour armour = (Armour)backpack.getItem(1);
         return armour.armourBase();
     }
 
@@ -78,13 +81,15 @@ public class Healer implements CharacterClass {
         this.description = description;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
+//    public List<Item> getItems() {
+//        return items;
+//    }
 
     public void setItems() {
-        items.add(new HolySymbol());
-        items.add(new Clothes());
+        backpack.insertItem(new HolySymbol());
+        backpack.insertItem(new Clothes());
+        backpack.insertItem(new Dagger());
+        backpack.addGold(15);
     }
 
     // TODO setAbilities
