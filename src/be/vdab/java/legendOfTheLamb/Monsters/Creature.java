@@ -11,5 +11,6 @@ public interface Creature {
     int attack();
     int damage();
     void setPlayer(Player player);
+    int dropGold();
 
 }

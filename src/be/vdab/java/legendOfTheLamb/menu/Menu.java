@@ -48,7 +48,6 @@ public class Menu {
         switch(choice){
             case 1:
                 System.out.println("Welcome to the Forest of Streams");
-                forest.getTile(5,9);
                 raceMenu();
                 break;
             case 2:

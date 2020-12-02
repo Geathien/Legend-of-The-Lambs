@@ -51,7 +51,10 @@ public class ClericalBackpack implements Pack {
         }
 
     }
-
+    @Override
+    public int getGold() {
+        return this.gold;
+    }
     @Override
     public void removeGold(int amount) {
         if (this.gold>0){

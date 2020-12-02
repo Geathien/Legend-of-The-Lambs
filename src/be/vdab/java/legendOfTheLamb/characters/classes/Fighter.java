@@ -1,15 +1,11 @@
 package be.vdab.java.legendOfTheLamb.characters.classes;
 
-import be.vdab.java.legendOfTheLamb.items.Item;
 import be.vdab.java.legendOfTheLamb.items.armour.Armour;
 import be.vdab.java.legendOfTheLamb.items.armour.ChainMail;
 import be.vdab.java.legendOfTheLamb.items.packs.Backpack;
+import be.vdab.java.legendOfTheLamb.items.packs.Pack;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.items.weapons.Sword;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class Fighter implements CharacterClass{
     private String characterClass = "Fighter";
@@ -83,6 +79,9 @@ public class Fighter implements CharacterClass{
        backpack.insertItem(new ChainMail());
        backpack.addGold(15);
 
+    }
+    public Pack getBackpack(){
+        return this.backpack;
     }
 
     @Override

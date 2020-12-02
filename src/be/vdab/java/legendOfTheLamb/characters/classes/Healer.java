@@ -3,7 +3,9 @@ package be.vdab.java.legendOfTheLamb.characters.classes;
 import be.vdab.java.legendOfTheLamb.items.Item;
 import be.vdab.java.legendOfTheLamb.items.armour.Armour;
 import be.vdab.java.legendOfTheLamb.items.armour.Clothes;
+import be.vdab.java.legendOfTheLamb.items.packs.Backpack;
 import be.vdab.java.legendOfTheLamb.items.packs.ClericalBackpack;
+import be.vdab.java.legendOfTheLamb.items.packs.Pack;
 import be.vdab.java.legendOfTheLamb.items.weapons.Dagger;
 import be.vdab.java.legendOfTheLamb.items.weapons.HolySymbol;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
@@ -81,10 +83,6 @@ public class Healer implements CharacterClass {
         this.description = description;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-
     public void setItems() {
         backpack.insertItem(new HolySymbol());
         backpack.insertItem(new Clothes());
@@ -92,7 +90,9 @@ public class Healer implements CharacterClass {
         backpack.addGold(15);
     }
 
-    // TODO setAbilities
+    public Pack getBackpack(){
+        return this.backpack;
+    }
 
 
     @Override

@@ -14,7 +14,15 @@ import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 
 public class Main {
     public static void main(String[] args) {
-        Menu game = new Menu();
-        game.startScreen();
+//        Menu game = new Menu();
+//        game.startScreen();
+        Player player = new Player("Dwarf","Fighter","Jefke");
+        System.out.println(player);
+        System.out.println(player.getCharacterClass().getBackpack().getGold());
+        HobbGoblin hobbGoblin = new HobbGoblin();
+        FightPhase fight= new FightPhase(player, hobbGoblin);
+        fight.fight();
+        System.out.println(player);
+        System.out.println(player.getCharacterClass().getBackpack().getGold());
     }
 }

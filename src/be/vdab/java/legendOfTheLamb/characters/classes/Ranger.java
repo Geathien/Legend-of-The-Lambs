@@ -4,6 +4,7 @@ import be.vdab.java.legendOfTheLamb.items.Item;
 import be.vdab.java.legendOfTheLamb.items.armour.Armour;
 import be.vdab.java.legendOfTheLamb.items.armour.LeatherArmour;
 import be.vdab.java.legendOfTheLamb.items.packs.Backpack;
+import be.vdab.java.legendOfTheLamb.items.packs.Pack;
 import be.vdab.java.legendOfTheLamb.items.weapons.Bow;
 import be.vdab.java.legendOfTheLamb.items.weapons.Sword;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
@@ -79,10 +80,6 @@ public class Ranger implements CharacterClass {
         this.description = description;
     }
 
-//    public List<Item> getItems() {
-//        return items;
-//    }
-
     public void setItems() {
        backpack.insertItem(new Bow());
         backpack.insertItem(new LeatherArmour());
@@ -90,8 +87,9 @@ public class Ranger implements CharacterClass {
         backpack.addGold(10);
     }
 
-    // TODO setAbilities
-
+    public Pack getBackpack(){
+        return this.backpack;
+    }
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package be.vdab.java.legendOfTheLamb.Battle;
 
 import be.vdab.java.legendOfTheLamb.Monsters.Creature;
+import be.vdab.java.legendOfTheLamb.characters.ExpGain;
 import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
@@ -54,6 +55,8 @@ public class FightPhase {
                     }
                 }
                 else{
+                    ExpGain expGain= new ExpGain(player,creature.getCR());
+                    player.getCharacterClass().getBackpack().addGold(creature.dropGold());
                     System.out.printf("%s is dead%n",creature.getName());
                 }
                 if (playerHP<=0){
@@ -83,6 +86,8 @@ public class FightPhase {
 
                 } else {
                     System.out.printf("%s is dead%n",creature.getName());
+                    ExpGain expGain= new ExpGain(player,creature.getCR());
+                    player.getCharacterClass().getBackpack().addGold(creature.dropGold());
                     break;
                 }
                 if (playerHP > 0) {
@@ -102,6 +107,7 @@ public class FightPhase {
                     break;
                 }
             }
+
 
         }
     }

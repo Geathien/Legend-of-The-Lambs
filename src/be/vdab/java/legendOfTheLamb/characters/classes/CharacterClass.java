@@ -1,5 +1,7 @@
 package be.vdab.java.legendOfTheLamb.characters.classes;
 
+import be.vdab.java.legendOfTheLamb.items.packs.Pack;
+
 public interface CharacterClass {
 
     String getCharacterClass();
@@ -12,7 +14,6 @@ public interface CharacterClass {
 
     int getHP();
 
-    //TODO getItems
-
+    Pack getBackpack();
 
 }

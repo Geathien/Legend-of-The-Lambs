@@ -71,6 +71,12 @@ public class Backpack implements Pack {
     public void getItems() {
         items.forEach(System.out::println);
     }
+
+    @Override
+    public int getGold() {
+        return this.gold;
+    }
+
     public Item getItem(int index){
         while(items.get(index) == null){
             System.out.println("choose another spot");

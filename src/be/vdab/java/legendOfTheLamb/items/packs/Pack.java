@@ -11,5 +11,6 @@ public interface Pack extends Item {
     void removeItem(int index);
     void removeGold(int amount);
     void getItems();
+    int getGold();
 
 }
