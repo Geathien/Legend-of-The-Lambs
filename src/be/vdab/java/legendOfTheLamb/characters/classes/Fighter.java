@@ -16,7 +16,6 @@ public class Fighter implements CharacterClass{
     private int armourBase = 8;
     private int lifeDice = 12;
     Backpack backpack= new Backpack();
-    //List<Item> items = new ArrayList<>();
     private int HP;
     private String description = "Fighters are masters of weapons. Always wearing heavy armour and even lethal with a free fist.";
     RandomNumberGenerator RNG = new RandomNumberGenerator();
@@ -85,13 +84,6 @@ public class Fighter implements CharacterClass{
        backpack.addGold(15);
 
     }
-
-    //public List<Item> getItems() {
-    //   return items;
-    // }
-
-    //TODO setAbilities
-
 
     @Override
     public String toString() {

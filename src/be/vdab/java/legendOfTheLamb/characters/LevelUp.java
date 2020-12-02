@@ -15,6 +15,7 @@ public class LevelUp {
     public void hpUp(){
         int hp = player.getHP()+ (rng.generateRandomNumber(player.getCharacterClass().getLifeDice())*2);
         player.newHP(hp);
+        player.getAbility().setPlayerHP(hp);
     }
 //    private void statsUp(){
 //

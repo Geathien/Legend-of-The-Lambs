@@ -49,6 +49,7 @@ public class ExpGain {
                 player.setLvl(i);
                 }
         }
+        player.getAbility().checkLvl();
     }
 
 }

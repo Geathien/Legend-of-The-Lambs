@@ -1,5 +1,6 @@
 package be.vdab.java.legendOfTheLamb.Monsters;
 
+import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 public class HobbGoblin implements Creature{
@@ -32,5 +33,10 @@ public class HobbGoblin implements Creature{
     }
     public int damage(){
         return rng.generateRandomNumber(8)+3;
+    }
+
+    @Override
+    public void setPlayer(Player player) {
+
     }
 }

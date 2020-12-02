@@ -1,5 +1,6 @@
 package be.vdab.java.legendOfTheLamb.characters.abilities;
 
+import be.vdab.java.legendOfTheLamb.Monsters.Creature;
 import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
@@ -7,8 +8,12 @@ import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 public class RangerAbility implements Ability {
     RandomNumberGenerator rng = new RandomNumberGenerator();
     KeyboardUtility keyboard = new KeyboardUtility();
+    int choice;
     int playerLvl;
+    int playerHP;
+    int creatureHP;
     Player player;
+    Creature creature;
 
     public RangerAbility(Player player){
         setPlayer(player);
@@ -17,10 +22,16 @@ public class RangerAbility implements Ability {
 
     private void setPlayer(Player player){
         this.player = player;
+        this.playerHP = player.getHP();
     }
 
-    private void checkLvl(){
+    public void checkLvl(){
         this.playerLvl = player.getLvl();
+    }
+
+    @Override
+    public int getCreatureHP() {
+        return this.creatureHP;
     }
 
     @Override
@@ -54,52 +65,106 @@ public class RangerAbility implements Ability {
 
     }
 
-    private int swordDamage() {
-        return rng.generateRandomNumber(10) + (int) Math.floor((player.getStrength()-10)/2);
+    private boolean swordAttack() {
+        int attack= rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getStrength()-10)/2);
+        int damage=rng.generateRandomNumber(10) + (int) Math.floor((player.getStrength()-10)/2);
+        if (attack>= creature.getAC()){
+            this.creatureHP-= damage;
+            System.out.println("You dealt "+damage+" damage");
+        }else{
+            System.out.println("You missed");
+        }
+        return true;
     }
-    private int swordAttack() {
-        return rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getStrength()-10)/2);
+
+
+    private boolean bowAttack() {
+        int attack= rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getDexterity()-10)/2);
+        int damage= rng.generateRandomNumber(12) + (int) Math.floor((player.getDexterity()-10)/2);
+        if (attack>= creature.getAC()){
+            this.creatureHP-= damage;
+            System.out.println("You dealt "+damage+" damage");
+        }else{
+            System.out.println("You missed");
+        }
+        return true;
     }
-    private int bowDamage() {
-        return rng.generateRandomNumber(12) + (int) Math.floor((player.getDexterity()-10)/2);
+
+    private boolean piercingShot(){
+        int attack = rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getDexterity()-10)/2);
+        int damage = rng.generateRandomNumber(12) + (int) Math.floor((player.getDexterity()-10)/2)*2;
+        if (attack>= creature.getAC()){
+            this.creatureHP-= damage;
+            System.out.println("You dealt "+damage+" damage");
+        }else{
+            System.out.println("You missed");
+        }
+        return true;
     }
-    private int bowAttack() {
-        return rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getDexterity()-10)/2);
-    }
-    private int piercingShotDamage(){
-        return rng.generateRandomNumber(12) + (int) Math.floor((player.getDexterity()-10)/2)*2;
-    }
-    private int piercingShotAttack(){
-        return rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getDexterity()-10)/2);
-    }
-    private int seekerShotDamage(){
+    private boolean seekerShot(){
         int damage = rng.generateRandomNumber(12) + (int) Math.floor((player.getDexterity()-10)/2);
-        return (int) Math.floor(damage/2);
+        this.creatureHP-= (int) Math.floor(damage/2);
+        System.out.println("You dealt "+(int)Math.floor(damage/2)+" damage");
+        return true;
     }
-    private int arrowRainDamage(){
-        return rng.generateRandomNumber(10) + (int) Math.floor((player.getDexterity()-10)/2);
+    private boolean arrowRain(){
+        int attack= rng.generateRandomNumber(20) + (int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getDexterity()-10)/2);
+        int damage= rng.generateRandomNumber(10) + (int) Math.floor((player.getDexterity()-10)/2);
+        if (attack>= creature.getAC()){
+            this.creatureHP-= damage;
+            System.out.println("You dealt "+damage+" damage");
+        }else{
+            System.out.println("You missed");
+        }
+        return true;
     }
 
     @Override
-    public void chooseAbility() {
-        int choice = keyboard.askForNumber();
+    public void chooseAbility(int choice) {
+       this.choice = choice;
+       boolean check= false;
         switch (choice){
             case 1:
-                System.out.println("Sword attack: "+swordAttack()+", damage: "+swordDamage());
+                check=swordAttack();
                 break;
             case 2:
-                System.out.println("Bow attack: "+ bowAttack()+", damage: "+bowDamage());
+                check=bowAttack();
                 break;
             case 3:
-                System.out.println("Piercing shot: "+ piercingShotAttack()+", damage: "+ piercingShotDamage());
+                if(playerLvl<3){
+                    System.out.println("You don't have the required level, choose another ability from above");
+                    break;
+                }
+                check = piercingShot();
                 break;
             case 4:
-                System.out.println("Seeker shot: always hit"+", damage: "+seekerShotDamage());
+                if(playerLvl<4){
+                    System.out.println("You don't have the required level, choose another ability from above");
+                    break;
+                }
+                check=seekerShot();
                 break ;
-            case 5:
-                System.out.println("Arrow rain: "+ bowAttack()+", damage: "+arrowRainDamage());
+            case 5:if(playerLvl<5){
+                System.out.println("You don't have the required level, choose another ability from above");
+                break;
+                }
+                check=arrowRain();
                 break;
         }
+        if(!check){int choice2= keyboard.askForNumber();
+        chooseAbility(choice2);}
+    }
+    public void setPlayerHP(int HP){
+        this.playerHP=HP;
+    }
+    public int getPlayerHP(){
+        return playerHP;
+    }
 
+
+    @Override
+    public void setCreature(Creature creature) {
+        this.creature= creature;
+        this.creatureHP = creature.getHP();
     }
 }

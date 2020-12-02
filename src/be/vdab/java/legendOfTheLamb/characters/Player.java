@@ -1,5 +1,9 @@
 package be.vdab.java.legendOfTheLamb.characters;
 
+import be.vdab.java.legendOfTheLamb.characters.abilities.Ability;
+import be.vdab.java.legendOfTheLamb.characters.abilities.FighterAbility;
+import be.vdab.java.legendOfTheLamb.characters.abilities.HealerAbility;
+import be.vdab.java.legendOfTheLamb.characters.abilities.RangerAbility;
 import be.vdab.java.legendOfTheLamb.characters.classes.CharacterClass;
 import be.vdab.java.legendOfTheLamb.characters.classes.Fighter;
 import be.vdab.java.legendOfTheLamb.characters.classes.Healer;
@@ -13,6 +17,7 @@ public class Player {
     private Race race;
     private CharacterClass characterClass;
     private String name;
+    private Ability ability;
     private int[] standardArray = new int[]{16, 14, 14, 13, 11, 8};
 
     public Player(String race, String characterClass, String name){
@@ -24,6 +29,7 @@ public class Player {
         setLvl(1);
         setAC();
         setSpeed();
+        setAbility();
     }
 
     int HP;
@@ -230,6 +236,24 @@ public class Player {
 
     public int getCharisma() {
         return charisma;
+    }
+
+    public void setAbility(){
+        switch (characterClass.getCharacterClass()){
+            case "Fighter":
+                this.ability=new FighterAbility(this);
+                break;
+            case "Ranger":
+                this.ability=new RangerAbility(this);
+                break;
+            case "Healer":
+                this.ability=new HealerAbility(this);
+                break;
+
+        }
+    }
+    public Ability getAbility(){
+        return this.ability;
     }
 
     @Override

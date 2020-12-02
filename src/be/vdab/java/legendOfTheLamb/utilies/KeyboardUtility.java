@@ -9,4 +9,7 @@ public class KeyboardUtility {
         System.out.println("please enter a number");
         return keyboard.nextInt();
     }
+    public String askForString(){
+        return keyboard.next();
+    }
 }
