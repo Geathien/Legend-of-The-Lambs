@@ -32,7 +32,7 @@ public class FightPhase {
                 playerHP=player.getAbility().getPlayerHP();
                 System.out.println("**********************");
                 System.out.println("your turn");
-                System.out.println("your HP is: "+playerHP+"/"+player.getHP());
+                System.out.println("\033[32myour HP is: "+playerHP+"/"+player.getHP()+"\033[0m");
                 player.getAbility().showAbilities();
                 choice=keyboard.askForNumber();
                 while ( choice>5||choice<1){
@@ -48,10 +48,10 @@ public class FightPhase {
                     System.out.printf("%s attacks%n",creature.getName());
                     if (creatureAttackHit()){
                         int creatureDamage = creature.damage();
-                        System.out.printf("%s dealt %d damage%n",creature.getName(),creatureDamage);
+                        System.out.printf("\033[31m%s dealt %d damage%n\033[0m",creature.getName(),creatureDamage);
                         playerHP-= creatureDamage;
                         player.getAbility().setPlayerHP(playerHP);
-                        System.out.println("you now have "+playerHP+" HP left");
+                        System.out.println("\033[32myou now have "+playerHP+" HP left"+"\033[0m");
                     }
                     else{
                         System.out.printf("%s missed%n",creature.getName());
@@ -60,10 +60,10 @@ public class FightPhase {
                 else{
                     ExpGain expGain= new ExpGain(player,creature.getCR());
                     player.getCharacterClass().getBackpack().addGold(creature.dropGold());
-                    System.out.printf("%s is dead%n",creature.getName());
+                    System.out.printf("\033[31m%s is dead%n\033[0m",creature.getName());
                 }
                 if (playerHP<=0){
-                    System.out.println("You're dead");
+                    System.out.println("\033[31mYou're dead\033[0m");
                     break;
                 }
 
@@ -79,17 +79,17 @@ public class FightPhase {
                     System.out.printf("%s attacks%n",creature.getName());
                         if (creatureAttackHit()){
                             int creatureDamage = creature.damage();
-                            System.out.printf("%s dealt %d damage%n",creature.getName(),creatureDamage);
+                            System.out.printf("\033[31m%s dealt %d damage%n\033[0m",creature.getName(),creatureDamage);
                             playerHP-= creatureDamage;
                             player.getAbility().setPlayerHP(playerHP);
-                            System.out.println("you now have "+playerHP+" HP left");
+                            System.out.println("\033[32myou now have "+playerHP+" HP left"+"\033[0m");
                         }
                         else{
                             System.out.printf("%s missed%n",creature.getName());
                         }
 
                 } else {
-                    System.out.printf("%s is dead%n",creature.getName());
+                    System.out.printf("\033[31m%s is dead%n\033[0m",creature.getName());
                     ExpGain expGain= new ExpGain(player,creature.getCR());
                     player.getCharacterClass().getBackpack().addGold(creature.dropGold());
                     break;
@@ -97,7 +97,7 @@ public class FightPhase {
                 if (playerHP > 0) {
                     System.out.println("**********************");
                     System.out.println("Your turn");
-                    System.out.println("your HP is: "+playerHP+"/"+player.getHP());
+                    System.out.println("\033[32myour HP is: "+playerHP+"/"+player.getHP()+"\033[0m");
                     player.getAbility().showAbilities();
                     int choice=keyboard.askForNumber();
                     while ( choice>5||choice<1){
@@ -108,7 +108,7 @@ public class FightPhase {
 
                 }
                 if (playerHP<=0){
-                    System.out.println("You're dead");
+                    System.out.println("\033[31mYou're dead\033[0m");
                     break;
                 }
             }

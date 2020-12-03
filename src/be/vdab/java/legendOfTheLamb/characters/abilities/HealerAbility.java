@@ -65,17 +65,17 @@ public class HealerAbility implements Ability{
     private boolean healingWord(){
         int healing=rng.generateRandomNumber(6)+ (int) Math.floor((player.getWisdom()-10)/2);
         if(this.playerHP==player.getHP()){
-            System.out.println("you're already at full health");
+            System.out.println("\033[32myou're already at full health\033[0m");
         }
         else if(this.playerHP+ healing> player.getHP()){
             int difference = player.getHP()-this.playerHP;
-            System.out.println("you healed for "+difference);
+            System.out.println("\033[32myou healed for "+difference+"\033[0m");
             this.playerHP=player.getHP();
-            System.out.println("You now have "+this.playerHP+" HP");
+            System.out.println("\033[32mYou now have "+this.playerHP+" HP\033[0m");
         }else {
             this.playerHP+= healing;
-            System.out.println("You healed for "+healing);
-            System.out.println("You now have "+this.playerHP+" HP");
+            System.out.println("\033[32mYou healed for "+healing+"\033[0m");
+            System.out.println("\033[32mYou now have "+this.playerHP+" HP\033[0m");
         }
         return true;
     }
@@ -94,16 +94,16 @@ public class HealerAbility implements Ability{
         int healing =rng.generateRandomNumber(12)+ (int) Math.floor((player.getWisdom()-10)/2);
         if(this.playerHP<player.getHP()){
             this.playerHP+= healing;
-            System.out.println("You healed for "+healing);
-            System.out.println("You now have "+this.playerHP+" HP");
+            System.out.println("\033[32mYou healed for "+healing+"\033[0m");
+            System.out.println("\033[32mYou now have "+this.playerHP+" HP\033[0m");
         }else if(this.playerHP+ healing> player.getHP()){
             int difference = player.getHP()-this.playerHP;
-            System.out.println("you healed for "+difference);
+            System.out.println("\033[32myou healed for "+difference+"\033[0m");
             this.playerHP=player.getHP();
-            System.out.println("You now have "+this.playerHP+" HP");
+            System.out.println("\033[32mYou now have "+this.playerHP+" HP\033[0m");
         }
         else{
-            System.out.println("you're already at full health");
+            System.out.println("\033[32myou're already at full health\033[0m");
         }
         return true;
     }
@@ -125,15 +125,15 @@ public class HealerAbility implements Ability{
        if (dice >= 5){
            if(this.playerHP<player.getHP()){
                this.playerHP+= healing;
-               System.out.println("You healed for "+healing);
-               System.out.println("You now have "+this.playerHP+" HP");
+               System.out.println("\033[32mYou healed for "+healing+"\033[0m");
+               System.out.println("\033[32mYou now have "+this.playerHP+" HP\033[0m");
            }else if(playerHP+ healing> player.getHP()){
-               System.out.println("you healed for "+(player.getHP()-this.playerHP));
+               System.out.println("\033[32myou healed for "+(player.getHP()-this.playerHP)+"\033[0m");
                this.playerHP=player.getHP();
-               System.out.println("You now have "+this.playerHP+" HP");
+               System.out.println("Y\033[32mou now have "+this.playerHP+" HP\033[0m");
            }
            else{
-               System.out.println("you're already at full health");
+               System.out.println("\033[32myou're already at full health\033[0m");
            }
            this.creatureHP-= damage;
            System.out.println("You dealt "+damage+" damage");

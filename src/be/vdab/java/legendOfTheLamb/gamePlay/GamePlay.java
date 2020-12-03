@@ -75,8 +75,14 @@ public class GamePlay {
                     encounterRandomMonster();
                 }
             }
-            System.out.println("Which direction would you like to go: (z/s/q/d)");
-            direction = keyboard.askForString();
+            if (player.getAbility().getPlayerHP()>0){
+                printMap();
+                System.out.println("Which direction would you like to go: (z/s/q/d)");
+                direction = keyboard.askForString();
+            }
+            else {
+                System.out.println("Game over");
+            }
         }
     }
 

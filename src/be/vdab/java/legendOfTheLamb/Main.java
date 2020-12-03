@@ -19,8 +19,8 @@ public class Main {
 //        System.out.println("You now have " + player.getCharacterClass().getBackpack().getGold() + " gold");
 //        FightPhase fight2 = new FightPhase(player, new Bugbear());
 //        fight2.fight();
-        System.out.println("\033[92mThis is green\033[0m");
-        System.out.println("hello\033[0m");
+        System.out.println("\033[32mThis is green\033[0m");
+        System.out.println("\033[92mhello\033[0m");
         Menu menu = new Menu();
     }
 }
