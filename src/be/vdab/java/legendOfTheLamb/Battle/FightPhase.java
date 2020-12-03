@@ -18,6 +18,7 @@ public class FightPhase {
         this.player=player;
         this.creature=creature;
         this.startFight= new StartFight(player,creature);
+        fight();
     }
 
     public void fight(){
@@ -29,8 +30,9 @@ public class FightPhase {
             int choice;
             while(playerHP>0&&this.creatureHP>0){
                 playerHP=player.getAbility().getPlayerHP();
+                System.out.println("**********************");
                 System.out.println("your turn");
-                System.out.println("your HP is: "+playerHP);
+                System.out.println("your HP is: "+playerHP+"/"+player.getHP());
                 player.getAbility().showAbilities();
                 choice=keyboard.askForNumber();
                 while ( choice>5||choice<1){
@@ -39,6 +41,7 @@ public class FightPhase {
                 }
                 playerAttack(choice);
                 this.creatureHP=player.getAbility().getCreatureHP();
+                System.out.println("**********************");
 
                 if (this.creatureHP>0){
                     System.out.printf("%s's turn%n",creature.getName());
@@ -71,6 +74,7 @@ public class FightPhase {
                 playerHP=player.getAbility().getPlayerHP();
                 this.creatureHP=player.getAbility().getCreatureHP();
                 if (this.creatureHP > 0) {
+                    System.out.println("**********************");
                     System.out.printf("%s's turn%n",creature.getName());
                     System.out.printf("%s attacks%n",creature.getName());
                         if (creatureAttackHit()){
@@ -91,8 +95,9 @@ public class FightPhase {
                     break;
                 }
                 if (playerHP > 0) {
+                    System.out.println("**********************");
                     System.out.println("Your turn");
-                    System.out.println("your HP is: "+playerHP);
+                    System.out.println("your HP is: "+playerHP+"/"+player.getHP());
                     player.getAbility().showAbilities();
                     int choice=keyboard.askForNumber();
                     while ( choice>5||choice<1){

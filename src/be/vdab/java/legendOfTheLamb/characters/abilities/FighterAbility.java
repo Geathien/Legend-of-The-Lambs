@@ -104,6 +104,9 @@ public class FighterAbility implements Ability {
             System.out.println("You dealt "+playerDamage+" damage");
             this.creatureHP -= playerDamage;
             }
+        else {
+            System.out.println("You missed");
+        }
         bool=true;
         return bool;
     }
@@ -166,7 +169,7 @@ public class FighterAbility implements Ability {
         boolean bool = false;
         int dice1 = rng.generateRandomNumber(20);
         int dice2 = rng.generateRandomNumber(20);
-        System.out.println("you rolled "+dice1 +"and "+ dice2);
+        System.out.println("you rolled "+dice1 +" and "+ dice2);
         int attack = Math.min(dice1, dice2);
         if(attack+(int)Math.floor(player.getLvl()/2) + (int) Math.floor((player.getStrength()-10)/2)>= creature.getAC()){
             this.creatureHP=0;

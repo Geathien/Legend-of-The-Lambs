@@ -156,7 +156,7 @@ public class Player {
     }
 
     public void setXp(int xp) {
-        this.xp = xp;
+        this.xp += xp;
 
     }
 
@@ -258,20 +258,19 @@ public class Player {
 
     @Override
     public String toString() {
-        return name + "{"+
-                "race=" + race +
-                ", characterClass=" + characterClass +
-                ", HP=" + HP +
-                ", AC=" + AC +
-                ", speed=" + speed +
-                ", lvl=" + lvl +
-                ", xp=" + xp +
-                ", strength=" + strength +
-                ", constitution=" + constitution +
-                ", dexterity=" + dexterity +
-                ", wisdom=" + wisdom +
-                ", intelligence=" + intelligence +
-                ", charisma=" + charisma +
-                '}';
+        return  "++++++++++++++++++++++\n" +
+                name + " lvl: " + lvl + " HP=" + HP +
+                "\nXP=" + xp +
+                "\nRace: " + race +
+                "\nClass: " + characterClass +
+                "\nAC: " + AC +
+                "\nSpeed: " + speed +
+                "\nStrength: " + strength +
+                "\nConstitution: " + constitution +
+                "\nDexterity: " + dexterity +
+                "\nWisdom: " + wisdom +
+                "\nIntelligence: " + intelligence +
+                "\nCharisma: " + charisma +
+                "\n++++++++++++++++++++++";
     }
 }

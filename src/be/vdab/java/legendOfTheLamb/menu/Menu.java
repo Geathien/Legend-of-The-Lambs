@@ -1,6 +1,7 @@
 package be.vdab.java.legendOfTheLamb.menu;
 
 import be.vdab.java.legendOfTheLamb.characters.Player;
+import be.vdab.java.legendOfTheLamb.gamePlay.GamePlay;
 import be.vdab.java.legendOfTheLamb.map.Forest;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 
@@ -10,7 +11,13 @@ public class Menu {
     String race;
     String characterClass;
     String name;
-    Forest forest= new Forest();
+    Forest forest;
+    GamePlay gamePlay;
+
+    public Menu(){
+        startScreen();
+    }
+
     public void startScreen(){
         System.out.println("+++++++++++++++++++++++++++++");
         System.out.println("++ Legend of the Lamb - DA ++");
@@ -36,22 +43,23 @@ public class Menu {
         switch (word){
             case "New":
                 newGame();
+                break;
+            case"Controls":
+                controlMenu();
+                break;
+
         }
     }
 
     public void newGame(){
         System.out.println("What map do you want to play?");
         System.out.println("   1. Forest of Streams");
-        System.out.println("   2. Cave of Thread");
         System.out.println("Please choose a map");
-        int choice= keyboard.askForNumber();
+        int choice = keyboard.askForNumber();
         switch(choice){
             case 1:
                 System.out.println("Welcome to the Forest of Streams");
-                raceMenu();
-                break;
-            case 2:
-                System.out.println("Welcome to the Cave of Thread");
+                this.forest = new Forest();
                 raceMenu();
                 break;
         }
@@ -76,5 +84,22 @@ public class Menu {
         this.name= keyboard.askForString();
         this.player=new Player(this.race,this.characterClass,this.name);
         System.out.println(this.player);
+        this.gamePlay = new GamePlay(this.player, this.forest);
+    }
+
+    private void controlMenu() {
+        System.out.println("Z:  north");
+        System.out.println("S:  south");
+        System.out.println("Q:  west");
+        System.out.println("D:  east");
+        mainMenu();
+    }
+
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public Forest getForest(){
+        return this.forest;
     }
 }
