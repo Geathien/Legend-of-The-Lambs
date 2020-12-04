@@ -10,6 +10,7 @@ public class FightPhase {
     RandomNumberGenerator rng = new RandomNumberGenerator();
     KeyboardUtility keyboard = new KeyboardUtility();
     int creatureHP;
+    int playerHP;
     StartFight startFight;
     Player player;
     Creature creature;
@@ -23,16 +24,16 @@ public class FightPhase {
 
     public void fight(){
         boolean order= startFight.turnOrder();
-        int playerHP=player.getAbility().getPlayerHP();
+        this.playerHP=player.getAbility().getPlayerHP();
         this.creatureHP=creature.getHP();
 
         if (order) {
             int choice;
-            while(playerHP>0&&this.creatureHP>0){
-                playerHP=player.getAbility().getPlayerHP();
+            while(this.playerHP>0&&this.creatureHP>0){
+                this.playerHP=player.getAbility().getPlayerHP();
                 System.out.println("**********************");
                 System.out.println("your turn");
-                System.out.println("\033[32myour HP is: "+playerHP+"/"+player.getHP()+"\033[0m");
+                System.out.println("\033[32myour HP is: "+this.playerHP+"/"+player.getHP()+"\033[0m");
                 player.getAbility().showAbilities();
                 choice=keyboard.askForNumber();
                 while ( choice>5||choice<1){
@@ -41,6 +42,7 @@ public class FightPhase {
                 }
                 playerAttack(choice);
                 this.creatureHP=player.getAbility().getCreatureHP();
+                this.playerHP=player.getAbility().getPlayerHP();
                 System.out.println("**********************");
 
                 if (this.creatureHP>0){
@@ -49,9 +51,9 @@ public class FightPhase {
                     if (creatureAttackHit()){
                         int creatureDamage = creature.damage();
                         System.out.printf("\033[31m%s dealt %d damage%n\033[0m",creature.getName(),creatureDamage);
-                        playerHP-= creatureDamage;
-                        player.getAbility().setPlayerHP(playerHP);
-                        System.out.println("\033[32myou now have "+playerHP+" HP left"+"\033[0m");
+                        this.playerHP-= creatureDamage;
+                        player.getAbility().setPlayerHP(this.playerHP);
+                        System.out.println("\033[32myou now have "+this.playerHP+" HP left"+"\033[0m");
                     }
                     else{
                         System.out.printf("%s missed%n",creature.getName());
@@ -70,8 +72,8 @@ public class FightPhase {
             }
         }
         else{
-            while(playerHP>0&&this.creatureHP>0) {
-                playerHP=player.getAbility().getPlayerHP();
+            while(this.playerHP>0&&this.creatureHP>0) {
+                this.playerHP=player.getAbility().getPlayerHP();
                 this.creatureHP=player.getAbility().getCreatureHP();
                 if (this.creatureHP > 0) {
                     System.out.println("**********************");
@@ -80,9 +82,9 @@ public class FightPhase {
                         if (creatureAttackHit()){
                             int creatureDamage = creature.damage();
                             System.out.printf("\033[31m%s dealt %d damage%n\033[0m",creature.getName(),creatureDamage);
-                            playerHP-= creatureDamage;
-                            player.getAbility().setPlayerHP(playerHP);
-                            System.out.println("\033[32myou now have "+playerHP+" HP left"+"\033[0m");
+                            this.playerHP-= creatureDamage;
+                            player.getAbility().setPlayerHP(this.playerHP);
+                            System.out.println("\033[32myou now have "+this.playerHP+" HP left"+"\033[0m");
                         }
                         else{
                             System.out.printf("%s missed%n",creature.getName());
@@ -94,10 +96,10 @@ public class FightPhase {
                     player.getCharacterClass().getBackpack().addGold(creature.dropGold());
                     break;
                 }
-                if (playerHP > 0) {
+                if (this.playerHP > 0) {
                     System.out.println("**********************");
                     System.out.println("Your turn");
-                    System.out.println("\033[32myour HP is: "+playerHP+"/"+player.getHP()+"\033[0m");
+                    System.out.println("\033[32myour HP is: "+this.playerHP+"/"+player.getHP()+"\033[0m");
                     player.getAbility().showAbilities();
                     int choice=keyboard.askForNumber();
                     while ( choice>5||choice<1){
