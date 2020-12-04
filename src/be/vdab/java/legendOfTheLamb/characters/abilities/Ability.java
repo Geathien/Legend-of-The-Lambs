@@ -2,7 +2,9 @@ package be.vdab.java.legendOfTheLamb.characters.abilities;
 
 import be.vdab.java.legendOfTheLamb.Monsters.Creature;
 
-public interface Ability {
+import java.io.Serializable;
+
+public interface Ability extends Serializable {
 
     void showAbilities();
     void chooseAbility(int choice);

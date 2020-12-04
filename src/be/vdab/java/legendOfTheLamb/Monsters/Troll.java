@@ -4,7 +4,7 @@ import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 public class Troll implements Creature{
-    RandomNumberGenerator rng= new RandomNumberGenerator();
+   transient RandomNumberGenerator rng= new RandomNumberGenerator();
     int dice;
     @Override
     public ChallengeRating getCR() {

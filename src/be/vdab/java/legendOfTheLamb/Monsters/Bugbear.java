@@ -4,7 +4,7 @@ import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 public class Bugbear implements Creature{
-    RandomNumberGenerator rng= new RandomNumberGenerator();
+    transient RandomNumberGenerator rng= new RandomNumberGenerator();
     Player player;
     int d1;
     int d2;

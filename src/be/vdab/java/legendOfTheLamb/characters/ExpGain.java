@@ -2,7 +2,9 @@ package be.vdab.java.legendOfTheLamb.characters;
 
 import be.vdab.java.legendOfTheLamb.Monsters.ChallengeRating;
 
-public class ExpGain {
+import java.io.Serializable;
+
+public class ExpGain implements Serializable {
     Player player;
     int lvl=1;
     LevelUp levelUp;

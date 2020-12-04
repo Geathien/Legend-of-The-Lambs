@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Backpack implements Pack {
-    Scanner keyboard = new Scanner(System.in);
+    transient Scanner keyboard = new Scanner(System.in);
     List<Item> items = new ArrayList<>();
     int maxSize = 20;
     int maxGold = 500;

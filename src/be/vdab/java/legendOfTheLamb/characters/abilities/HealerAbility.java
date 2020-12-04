@@ -6,8 +6,8 @@ import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 
 public class HealerAbility implements Ability{
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-    KeyboardUtility keyboard = new KeyboardUtility();
+    transient RandomNumberGenerator rng = new RandomNumberGenerator();
+    transient KeyboardUtility keyboard = new KeyboardUtility();
     int choice;
     int playerLvl;
     int playerHP;

@@ -6,9 +6,11 @@ import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 
-public class FightPhase {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-    KeyboardUtility keyboard = new KeyboardUtility();
+import java.io.Serializable;
+
+public class FightPhase implements Serializable {
+    transient RandomNumberGenerator rng = new RandomNumberGenerator();
+    transient KeyboardUtility keyboard = new KeyboardUtility();
     int creatureHP;
     int playerHP;
     StartFight startFight;

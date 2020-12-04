@@ -6,8 +6,8 @@ import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 
 public class RangerAbility implements Ability {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-    KeyboardUtility keyboard = new KeyboardUtility();
+    transient RandomNumberGenerator rng ;
+    transient KeyboardUtility keyboard;
     int choice;
     int playerLvl;
     int playerHP;
@@ -16,6 +16,8 @@ public class RangerAbility implements Ability {
     Creature creature;
 
     public RangerAbility(Player player){
+        rng = new RandomNumberGenerator();
+        keyboard = new KeyboardUtility();
         setPlayer(player);
         checkLvl();
     }

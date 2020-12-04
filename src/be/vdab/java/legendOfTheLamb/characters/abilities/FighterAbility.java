@@ -8,8 +8,8 @@ import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
 import java.util.Random;
 
 public class FighterAbility implements Ability {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-    KeyboardUtility keyboard = new KeyboardUtility();
+    transient RandomNumberGenerator rng = new RandomNumberGenerator();
+    transient KeyboardUtility keyboard = new KeyboardUtility();
     int playerLvl;
     int choice;
     Player player;

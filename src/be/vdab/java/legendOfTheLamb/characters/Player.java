@@ -13,7 +13,9 @@ import be.vdab.java.legendOfTheLamb.characters.races.Elf;
 import be.vdab.java.legendOfTheLamb.characters.races.Human;
 import be.vdab.java.legendOfTheLamb.characters.races.Race;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private Race race;
     private CharacterClass characterClass;
     private String name;

@@ -2,7 +2,9 @@ package be.vdab.java.legendOfTheLamb.Monsters;
 
 import be.vdab.java.legendOfTheLamb.characters.Player;
 
-public interface Creature {
+import java.io.Serializable;
+
+public interface Creature extends Serializable {
 
     ChallengeRating getCR();
     int getHP();

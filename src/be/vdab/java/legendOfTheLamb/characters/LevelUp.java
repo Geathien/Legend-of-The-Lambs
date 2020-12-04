@@ -2,9 +2,11 @@ package be.vdab.java.legendOfTheLamb.characters;
 
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
-public class LevelUp {
+import java.io.Serializable;
+
+public class LevelUp implements Serializable {
     private Player player;
-    private RandomNumberGenerator rng=new RandomNumberGenerator();
+    transient private RandomNumberGenerator rng=new RandomNumberGenerator();
 
     public LevelUp(Player player){
         this.player=player;

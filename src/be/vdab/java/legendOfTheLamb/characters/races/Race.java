@@ -1,6 +1,8 @@
 package be.vdab.java.legendOfTheLamb.characters.races;
 
-public interface Race {
+import java.io.Serializable;
+
+public interface Race extends Serializable {
 
     String getRace();
 

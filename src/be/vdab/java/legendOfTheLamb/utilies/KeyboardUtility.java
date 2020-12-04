@@ -1,9 +1,10 @@
 package be.vdab.java.legendOfTheLamb.utilies;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class KeyboardUtility {
+public class KeyboardUtility implements Serializable {
     Scanner keyboard = new Scanner(System.in);
     int number = 0;
 

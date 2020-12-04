@@ -5,26 +5,34 @@ import be.vdab.java.legendOfTheLamb.Battle.StartFight;
 import be.vdab.java.legendOfTheLamb.Monsters.*;
 import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.map.Forest;
+import be.vdab.java.legendOfTheLamb.menu.InGameMenu;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 import be.vdab.java.legendOfTheLamb.utilies.KeyboardUtility;
+import be.vdab.java.legendOfTheLamb.utilies.SaveFile;
 
-public class GamePlay {
-    KeyboardUtility keyboard = new KeyboardUtility();
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-    FightPhase fightPhase;
+import java.io.Serializable;
+
+public class GamePlay implements Serializable {
+    transient KeyboardUtility keyboard = new KeyboardUtility();
+    transient RandomNumberGenerator rng = new RandomNumberGenerator();
+    transient InGameMenu inGameMenu;
+    transient FightPhase fightPhase;
     Player player;
     Forest forest;
+    int xPosition;
+    int yPosition;
 
     public GamePlay(Player player, Forest forest){
         this.player = player;
         this.forest = forest;
-        setPlayerPosition(39,6);
-        printMap();
+        SaveFile.saveGame(this);
         walk();
     }
 
     public void setPlayerPosition(int x, int y){
-        forest.setPlayerPosition(x, y);
+        forest.setPlayerXPosition(x);
+        forest.setPlayerYPosition(y);
+        forest.setPlayerPosition();
         forest.write();
     }
 
@@ -33,10 +41,13 @@ public class GamePlay {
     }
 
     public void walk(){
-        System.out.println("Which direction would you like to go: (z/s/q/d)");
+        printMap();
+        System.out.println("Which direction would you like to go: (z/s/q/d) (p: menu) (c: character stats)");
         String direction = keyboard.askForString();
         boolean bool = false;
         while (player.getAbility().getPlayerHP()>0) {
+            this.xPosition=this.forest.getPlayerXPosition();
+            this.yPosition=this.forest.getPlayerYPosition();
             switch (direction) {
                 case "z":
                     bool = goNorth();
@@ -50,10 +61,18 @@ public class GamePlay {
                 case "d":
                     bool = goEast();
                     break;
+                case "p":
+                    inGameMenu=new InGameMenu(this);
+                    bool = false;
+                    break;
+                case "c":
+                    System.out.println(player);
+                    bool = false;
+                    break;
             }
             if (bool){
-                printMap();
-                if (forest.getPlayerXPosition() == 15 && forest.getPlayerYPosition() == 27){
+
+                if (this.xPosition == 15 && this.yPosition == 27){
                     if (player.getLvl() >= 4){
                         System.out.println("***Boss fight***");
                         this.fightPhase = new FightPhase(this.player, new Bugbear());
@@ -62,7 +81,7 @@ public class GamePlay {
                     }
 
                 }
-                if (forest.getPlayerXPosition() == 21 && forest.getPlayerYPosition() == 29){
+                if (this.xPosition == 21 && this.yPosition == 29){
                     if (player.getLvl() >= 2) {
                         System.out.println("***Boss fight***");
                         this.fightPhase = new FightPhase(this.player, new Wolf());
@@ -77,7 +96,7 @@ public class GamePlay {
             }
             if (player.getAbility().getPlayerHP()>0){
                 printMap();
-                System.out.println("Which direction would you like to go: (z/s/q/d)");
+                System.out.println("Which direction would you like to go: (z/s/q/d) (p: menu) ( c: character stats)");
                 direction = keyboard.askForString();
             }
             else {
@@ -88,11 +107,12 @@ public class GamePlay {
 
     private boolean goNorth(){
         boolean check = false;
-        int playerXPosition= forest.getPlayerXPosition()-1;
-        int playerYPosition= forest.getPlayerYPosition();
-        if (forest.wallCheck(playerXPosition,playerYPosition)){
+        this.xPosition-= 1;
+        if (forest.wallCheck(this.xPosition,this.yPosition)){
             forest.generateMap();
-            forest.setPlayerPosition(playerXPosition,playerYPosition);
+            forest.setPlayerXPosition(this.xPosition);
+            forest.setPlayerYPosition(this.yPosition);
+            forest.setPlayerPosition();
             forest.write();
             check = true;
         }else{
@@ -102,11 +122,12 @@ public class GamePlay {
     }
     private boolean goSouth(){
         boolean check = false;
-        int playerXPosition= forest.getPlayerXPosition()+1;
-        int playerYPosition= forest.getPlayerYPosition();
-        if (forest.wallCheck(playerXPosition,playerYPosition)){
+        this.xPosition+= 1;
+        if (forest.wallCheck(this.xPosition,this.yPosition)){
             forest.generateMap();
-            forest.setPlayerPosition(playerXPosition,playerYPosition);
+            forest.setPlayerXPosition(this.xPosition);
+            forest.setPlayerYPosition(this.yPosition);
+            forest.setPlayerPosition();
             forest.write();
             check = true;
         }else{
@@ -116,11 +137,12 @@ public class GamePlay {
     }
     private boolean goWest(){
         boolean check = false;
-        int playerXPosition= forest.getPlayerXPosition();
-        int playerYPosition= (forest.getPlayerYPosition()-1);
-        if (forest.wallCheck(playerXPosition,playerYPosition)){
+        this.yPosition-= 1;
+        if (forest.wallCheck(this.xPosition,this.yPosition)){
             forest.generateMap();
-            forest.setPlayerPosition(playerXPosition,playerYPosition);
+            forest.setPlayerXPosition(this.xPosition);
+            forest.setPlayerYPosition(this.yPosition);
+            forest.setPlayerPosition();
             forest.write();
             check = true;
         }else{
@@ -130,11 +152,12 @@ public class GamePlay {
     }
     private boolean goEast(){
         boolean check = false;
-        int playerXPosition= forest.getPlayerXPosition();
-        int playerYPosition= forest.getPlayerYPosition()+1;
-        if (forest.wallCheck(playerXPosition,playerYPosition)){
+        this.yPosition+=1;
+        if (forest.wallCheck(this.xPosition,this.yPosition)){
             forest.generateMap();
-            forest.setPlayerPosition(playerXPosition,playerYPosition);
+            forest.setPlayerXPosition(this.xPosition);
+            forest.setPlayerYPosition(this.yPosition);
+            forest.setPlayerPosition();
             forest.write();
             check = true;
         }else{
@@ -193,6 +216,14 @@ public class GamePlay {
                 }
                 break;
         }
-
     }
+    public Player getPlayer(){
+        return this.player;
+    }
+    public Forest getForest(){
+        this.xPosition= forest.getPlayerXPosition();
+        this.yPosition= forest.getPlayerYPosition();
+        return this.forest=new Forest(this.xPosition, this.yPosition);
+    }
+
 }

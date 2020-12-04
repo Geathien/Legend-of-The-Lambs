@@ -4,7 +4,7 @@ import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 public class GoblinFighter implements Creature {
-    RandomNumberGenerator rng= new RandomNumberGenerator();
+    transient RandomNumberGenerator rng= new RandomNumberGenerator();
     @Override
     public ChallengeRating getCR() {
         return ChallengeRating.CR3;

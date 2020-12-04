@@ -3,7 +3,7 @@ package be.vdab.java.legendOfTheLamb.items.weapons;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
 public class HolySymbol implements Weapon {
-    RandomNumberGenerator RNG = new RandomNumberGenerator();
+
 
     public HolySymbol(){
 
@@ -14,15 +14,7 @@ public class HolySymbol implements Weapon {
         return "Holy Symbol";
     }
 
-//    @Override
-//    public int attack() {
-//        return RNG.generateRandomNumber(21) + (int)Math.floor(player.getLvl()/2) + player.getWisdom();
-//    }
-//
-//    @Override
-//    public int damage() {
-//        return RNG.generateRandomNumber(7) + player.getWisdom();
-//    }
+
 
     @Override
     public String description() {

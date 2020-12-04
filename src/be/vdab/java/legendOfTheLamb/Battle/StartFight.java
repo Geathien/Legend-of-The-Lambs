@@ -4,8 +4,10 @@ import be.vdab.java.legendOfTheLamb.Monsters.Creature;
 import be.vdab.java.legendOfTheLamb.characters.Player;
 import be.vdab.java.legendOfTheLamb.randomNumberGenerator.RandomNumberGenerator;
 
-public class StartFight {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
+import java.io.Serializable;
+
+public class StartFight implements Serializable {
+    transient RandomNumberGenerator rng = new RandomNumberGenerator();
     Player player;
     Creature creature;
     int initiativePlayer;

@@ -3,17 +3,37 @@ package be.vdab.java.legendOfTheLamb.map;
 import java.io.*;
 import java.nio.file.Path;
 
-public class Forest {
-    Path path = Path.of(".\\src\\be\\vdab\\java\\legendOfTheLamb\\map\\Forest.txt");
+public class Forest implements Serializable {
+    transient Path path = Path.of(".\\src\\be\\vdab\\java\\legendOfTheLamb\\map\\Forest.txt");
     private char[][] map= new char[40][40];
     private int playerXPosition;
     private int playerYPosition;
 
     public Forest(){
         generateMap();
+        setPlayerXPosition(39);
+        setPlayerYPosition(6);
+        setPlayerPosition();
         write();
         read();
     }
+    public Forest(int x, int y){
+        generateMap();
+        setPlayerXPosition(x);
+        setPlayerYPosition(y);
+        setPlayerPosition();
+        write();
+        //read();
+    }
+
+    public void setPlayerXPosition(int playerXPosition) {
+        this.playerXPosition = playerXPosition;
+    }
+
+    public void setPlayerYPosition(int playerYPosition) {
+        this.playerYPosition = playerYPosition;
+    }
+
     public void generateMap(){
         for(int i = 0; i< map.length;i++){
             for(int j = 0;j <map[0].length;j++){
@@ -182,10 +202,8 @@ public class Forest {
         return check;
     }
 
-    public void setPlayerPosition(int x, int y){
-        map[x][y] = 'P';
-        this.playerXPosition = x;
-        this.playerYPosition = y;
+    public void setPlayerPosition(){
+        map[this.getPlayerXPosition()][this.getPlayerYPosition()] = 'P';
     }
 
     public int getPlayerXPosition(){
