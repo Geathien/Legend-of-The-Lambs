@@ -1,2 +1,2 @@
-module Legends.of.the.Lamb {
+module be.vdab.java.legendOfTheLamb {
 }
